@@ -1,0 +1,10 @@
+{
+    "8600": {
+        "MABLAG'": 4999000.0,
+        "CASHBACK": 4.0,
+        "XAYRIYA": 0,
+        "KARTA O'TKAZMALARI": 1000.0,
+        "UY TO'LOVLARI": 0,
+        "CHIPTA XARIDI": 0
+    }
+}

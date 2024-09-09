@@ -1,0 +1,13 @@
+{
+    "MENING MASHINAM": {
+        "MODEL": "GENTRA",
+        "AVTOMASHINA RAQAMI": "R 009 CB",
+        "JARIMA": "JARIMA MAVJUD EMAS"
+    },
+    "OTAMNING MASHINASI": {
+        "MODEL": "BYD",
+        "AVTOMASHINA RAQAMI": "01 B 423 HC",
+        "JARIMA": "MAVJUD EMAS"
+    }
+    
+}
