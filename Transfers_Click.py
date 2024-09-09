@@ -5,6 +5,9 @@ from PyQt5.QtCore import *
 class Transfers_(QWidget):
     def __init__(self) -> None:
         super().__init__()
+        # while True:
+        #     if self.check():
+        #         break
         self.setFixedSize(500,400)
         self.setStyleSheet("font-size:20px")
         self.setWindowTitle("Transfers")
@@ -21,6 +24,7 @@ class Transfers_(QWidget):
         # search btn
         self.search_btn = QPushButton(clicked=self.search)
         self.search_btn.setIcon(QIcon("Click_Up/images/search.png"))
+        # self.search_btn.setText("\n\nSearch")
         # info btn
         self.info_lbl = QLabel("Enter the full card / wallet / phone number of the \nrecipient")
         self.info_lbl.setAlignment(Qt.AlignCenter)
@@ -35,6 +39,7 @@ class Transfers_(QWidget):
         self.main_ver.addWidget(self.info_btn)
         # self.main_ver.addStretch(2)
         self.setLayout(self.main_ver)
+        self.my_card = QLabel("0000000000000000")
     
     def search(self):
         try:
@@ -122,8 +127,10 @@ class Transfers_(QWidget):
         # self.info_lbl.show()
     
     def send_money(self):
-        if int(self.input_sum.text())<=self.data[self.card_number.text()]["SUM"]:
-            self.data[self.card_number.text()]["SUM"] -= int(self.input_sum.text())
+        if self.data[self.my_card.text()]["SUM"]>=self.data[self.card_number.text()]["SUM"]:
+            self.data[self.my_card.text()]["SUM"] -= int(self.input_sum.text())
+            self.data[self.card_number.text()]["SUM"] += int(self.input_sum.text())
+            
             with open("data.json","w") as f:
                 json.dump(self.data,f,indent=4)
             self.money_info.setText("Succesfull!!!")
@@ -134,53 +141,46 @@ class Transfers_(QWidget):
             self.money_info.setStyleSheet("color:red")
             self.money_info.show()
         
+    # def check(self):
+    #     winx = QWidget()
+    #     winx.setStyleSheet("font:20px")
+    #     self.main = QVBoxLayout()
+    #     self.my_card = QLineEdit()
+    #     self.my_card.setPlaceholderText("Your card number...")
+    #     self.tel_num =  QLineEdit()
+    #     self.submit_btn = QPushButton("Submit")
+    #     self.tel_num.setPlaceholderText("Phone number")
+    #     reg_ex = QRegExp("^\\998\\s?\\d{2}\\s?\\d{3}\\s?\\d{2}\\s?\\d{2}$")
+    #     validator = QRegExpValidator(reg_ex, self.tel_num)
+    #     self.m_y = QLineEdit()
+    #     self.m_y.setPlaceholderText("MM/YY")
+    #     reg_ex = QRegExp("^(0[1-9]|1[0-2])/([0-9]{2})$")
+    #     validator = QRegExpValidator(reg_ex, self.m_y)
+    #     self.m_y.setValidator(validator)
+    #     self.main.addWidget(self.my_card)
+    #     self.main.addWidget(self.tel_num)
+    #     self.main.addWidget(self.submit_btn)
+    #     winx.setLayout(self.main)
+    #     with open("data.json") as f:
+    #         self.data = json.load(f)
+    #     # self.submit_btn.clicked.connect(self.returnx)
+    #     winx.show()
+    #     app.exec_()
+        # if self.submit_btn.clicked.connect(self.returnx):
+        #     self.show()
+        #     winx.hide()
+        # else:
+        #     print("kajbkasbc")
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    # def returnx(self):
+    #     if self.my_card.text() in self.data:
+    #         print("hvschva")
+    #         for i in self.data:
+    #             if self.data[i]["number"] == int(self.tel_num.text()):
+    #                 return True
+    #     else:
+    #         return False
+ 
         
         
         
