@@ -1,1 +1,0 @@
-Click up project with PYQT5

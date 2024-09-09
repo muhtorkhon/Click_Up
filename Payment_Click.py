@@ -1,18 +1,19 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+from payme_mobil import *
 
 class Payment_(QWidget):
-  def __init__(self) -> None:
+  def __init__(self):
     super().__init__()
     self.resize(1700,900)
-    self.setStyleSheet("background:#aaa;font-size:20px")
+    self.setStyleSheet("background:#fff;font-size:20px")
     
     self.g_btn_lyt = QGridLayout()
     self.h_btn_lyt = QHBoxLayout()
     self.h_edit_lyt = QHBoxLayout()
     self.v_main_lyt = QVBoxLayout()
 
-    self.btn_sara = QPushButton(" Saralangan",clicked=self.sara)
+    self.btn_sara = QPushButton(" Saralangan", clicked=self.sara)
     self.btn_sara.setIcon(QIcon("images/star.png"))
 
     self.btn_mobil = QPushButton(" Mobil opertor",clicked=self.mobil)
@@ -83,6 +84,7 @@ class Payment_(QWidget):
         index += 1
 
     self.btn_x_tolov = QPushButton("Xizmatlarga to'lov",clicked=self.x_tolov)
+    self.btn_x_tolov.setStyleSheet("background:skyblue")
     self.btn_x_tolov.setFixedSize(280,60)
 
     self.btn_j_tolov = QPushButton("Joylarda to'lov",clicked=self.j_tolov)
@@ -105,15 +107,21 @@ class Payment_(QWidget):
     self.lbl.setFixedSize(220,50)
     self.lbl.setStyleSheet("color:blue")
 
-    self.btn_bell = QPushButton()
+    self.btn_bell = QPushButton("",clicked=self.newx)
     self.btn_bell.setIcon(QIcon("images/bell.png"))
     self.btn_bell.setFixedSize(50,50)
+  
+    self.main_exit_btn = QPushButton("",clicked=self.hide)
+    self.main_exit_btn.setIcon(QIcon("images/sign-out-alt.png"))
+    self.main_exit_btn.setFixedSize(50,50)
+
 
     self.h_edit_lyt.addStretch()
     self.h_edit_lyt.addWidget(self.btn_search)
     self.h_edit_lyt.addWidget(self.edit)
     self.h_edit_lyt.addWidget(self.lbl)
     self.h_edit_lyt.addWidget(self.btn_bell)
+    self.h_edit_lyt.addWidget(self.main_exit_btn)
 
     self.h_btn_lyt.addStretch()
     self.h_btn_lyt.addWidget(self.btn_x_tolov)
@@ -127,24 +135,82 @@ class Payment_(QWidget):
   
 
   def sara(self):
-    pass
+    QMessageBox.information(self, "Saralangan","Sizda hali tanlangan to'lovlar yo'q")
+ 
 
   def mobil(self):
-    pass
+    self.mob = Mobil()
+    self.mob.show()
 
   def d_xizmat(self):
-    pass
+    self.scrol = QScrollArea()
+    self.scrol.resize(1700,900)
+
+    self.exti_btn = QPushButton("",clicked=self.scrol.hide)
+    self.exti_btn.setFixedSize(50,50)
+    self.exti_btn.setIcon(QIcon("images/sign-out-alt.png"))
+
+    self.dra = QLabel("        ")
+
+    self.h_btn_exit_lbl = QHBoxLayout()
+    self.v_rasm_lyt = QVBoxLayout()
+    asr = QWidget()
+
+    self.h_btn_exit_lbl.addStretch()
+    self.h_btn_exit_lbl.addWidget(self.exti_btn)
+    self.h_btn_exit_lbl.addWidget(self.dra)
+    self.v_rasm_lyt.addLayout(self.h_btn_exit_lbl)
+
+    self.rasm_lts = ["images/davlat1.png","images/davlat2.png"]
+    
+    for i in self.rasm_lts:
+      self.lbl_rasm = QLabel()
+      pxmap = QPixmap(i)
+      self.lbl_rasm.setPixmap(pxmap)
+      self.lbl_rasm.setFixedSize(1700,900)
+      self.v_rasm_lyt.addWidget(self.lbl_rasm)
+
+    asr.setLayout(self.v_rasm_lyt)
+    self.scrol.setWidget(asr)
+    self.scrol.show()
 
   def komunal(self):
-    pass
+    self.k_scrol = QScrollArea()
+    self.k_scrol.resize(1700,900)
+    k_win = QWidget()
+
+    self.k_exit_btn = QPushButton("",clicked=self.k_scrol.hide)
+    self.k_exit_btn.setIcon(QIcon("images/sign-out-alt.png"))
+    self.k_exit_btn.setFixedSize(50,50)
+
+    self.pra = QLabel("        ")
+
+    self.v_komunal_lyt = QVBoxLayout()
+    self.h_k_exit_lyt = QHBoxLayout()
+
+    self.h_k_exit_lyt.addStretch()
+    self.h_k_exit_lyt.addWidget(self.k_exit_btn)
+    self.h_k_exit_lyt.addWidget(self.pra)
+  
+    self.v_komunal_lyt.addLayout(self.h_k_exit_lyt)
+
+    self.komunal_lts = ["images/komunal1.png","images/komunal2.png","images/komunal3.png"]
+
+    for i in self.komunal_lts:
+      self.kml = QLabel()
+      px = QPixmap(i)
+      self.kml.setPixmap(px)
+      self.kml.setFixedSize(1700,900)
+      self.v_komunal_lyt.addWidget(self.kml)
+
+    k_win.setLayout(self.v_komunal_lyt)
+    self.k_scrol.setWidget(k_win)
+    self.k_scrol.show()
 
   def krs(self):
     pass
 
   def internet(self):
-    pass
-
-  def sara(self):
     pass
 
   def soliq(self):
@@ -192,20 +258,26 @@ class Payment_(QWidget):
 
 
 
+
   def x_tolov(self):
     self.btn_x_tolov.setStyleSheet("background:skyblue")
     self.btn_j_tolov.setStyleSheet("background:white")
     self.btn_katta_c.setStyleSheet("background:white")
+
   def j_tolov(self):
     self.btn_j_tolov.setStyleSheet("background:skyblue")
     self.btn_x_tolov.setStyleSheet("background:white")
     self.btn_katta_c.setStyleSheet("background:white")
+    QMessageBox.information(self,"Joylarda to'lov","Joylarda to'lov bo'limi yaratilmagan")
 
   def katta_c(self):
     self.btn_katta_c.setStyleSheet("background:skyblue")
     self.btn_j_tolov.setStyleSheet("background:white")
     self.btn_x_tolov.setStyleSheet("background:white")
+    QMessageBox.information(self,"Katta cashbek","Katta Cashbek bo'limi yaratilmagan")
 
+  def newx(self):
+    QMessageBox.information(self,"Xabar","Yangi Xabar yo'q")
 
 if __name__ == "__main__":
   app = QApplication([])
